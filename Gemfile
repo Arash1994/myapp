@@ -13,6 +13,7 @@ gem 'mysql2', '>= 0.3.18', '< 0.5'
 
 gem 'devise'
 gem 'sendgrid-rails', '~> 3.1'
+gem 'omniauth-facebook', '~> 4.0'
 
 
 gem 'paperclip', '~> 4.3', '>= 4.3.6'

@@ -3,8 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   has_and_belongs_to_many :oauth_credentials
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-  # devise :omniauthable, omniauth_providers: [:google_oauth2]
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
    def admin?
    	role == "admin"

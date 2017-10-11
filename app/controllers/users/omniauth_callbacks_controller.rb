@@ -5,7 +5,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # You should also create an action method in this controller like this:
   # def twitter
   # end
+  def Facebook
+          p request.env['omniauth.auth']
 
+          redirect_to root_path 
+      end
   # More info at:
   # https://github.com/plataformatec/devise#omniauth
 
