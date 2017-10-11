@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+  <div class="col-lg-3"></div>
+  <div class="col-lg-6" >
+    </div>
+    <div class="col-lg-3" style="background-color:rgba(0,102,102,1)">
+<h2 style="color:white; padding-top:10px; padding-bottom:10px", class="text-center" >Forgot your password?</h2>
+
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="field">
+    <%= f.email_field :email, autofocus: true, placeholder: "email", class: "form-control" %>
+  </div>
+  <br>
+  <div class="actions">
+    <%= f.submit "Send me", class: "btn btn-success" %>
+  </div>
+<% end %>
+<div style="padding-bottom:10px">
+<%= render "devise/shared/links" %>
+</div>
+</div>
+</div>
+</div>

@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+  <div class="col-lg-3"></div>
+  <div class="col-lg-6" >
+    </div>
+  <div class="col-lg-3" style="background-color:rgba(0,0,0,0.40)">
+<% if current_user %>
+<% if current_user.admin?%>
+
+<h2>Edit User</h2>
+
+<%= form_for @member, url: admin_member_path(@member), html: { method: :put } do |f| %>
+
+  <div class="field">
+   <input type="text" name="email" value = "<%=@member.email%>" class="form-control" >
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Update", class: "btn btn-primary responsive" %>
+  </div>
+<% end %>
+
+<%else%>
+	<%flash[:error] = "You are not authorize to access members!" %>
+	<%controller.redirect_to root_path %>
+<%end%>
+<%else%>
+	<%flash[:error] = "admin_login required!" %>
+	<%controller.redirect_to new_user_session_path %>
+ <% end%>
+</div>
+</div>
+</div>

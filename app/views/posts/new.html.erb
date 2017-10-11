@@ -1,0 +1,27 @@
+
+<div class="container">
+  <div class="row">
+  <div class="col-lg-3"></div>
+  <div class="col-lg-6" style="background-color:rgba(0,102,102,1	)" >
+		<h1 style="color:white ; padding-top:10px">New Post</h1>
+		<hr>
+		<%= form_for @post, url: posts_path, :html => { :multipart => true }  do |f| %>
+
+			<%= f.file_field :image ,class: "form-control", placeholder: "Image"%>
+			<br>
+			<%= f.text_field :title, placeholder: "Title", class: "form-control"%>
+			<br>
+			<%= f.collection_select(:category_id, Category.all, :id, :name, { :prompt => 'Select a category', :selected => @post.category_id }, { class: 'form-control' }) %>
+			<br>
+			<%= f.text_area :description, placeholder: "description",  class: "form-control" %>
+			<br>
+			<div style="padding-bottom:10px">
+			<%= f.submit class: "btn btn-primary"%>
+			</div>
+		<% end %>
+    </div>
+  <div class="col-lg-3" >
+
+</div>
+</div>
+</div>

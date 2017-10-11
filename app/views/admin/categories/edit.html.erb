@@ -1,0 +1,35 @@
+<% if current_user %>
+	<% if current_user.admin?%>
+		<h1>Editing Admin Category</h1>
+		<%= form_for @category, url: admin_category_path(@category), html: { method: :put } do |form| %>
+  <% if @category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
+
+      <ul>
+      <% @category.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :admin_category_name %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+		<%= link_to 'Show', @admin_category %> |
+		<%= link_to 'Back', admin_categories_path %>
+	<%else%>
+		<%flash[:error] = "You are not authorize to access members!" %>
+		<%controller.redirect_to root_path %>
+	<%end%>
+<%else%>
+  	<%flash[:error] = "admin_login required!" %>
+    <%controller.redirect_to new_user_session_path %>
+<% end%>

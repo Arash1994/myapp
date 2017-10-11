@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+  <div class="col-lg-3"></div>
+  <div class="col-lg-6" >
+    </div>
+  <div class="col-lg-3" style="background-color:rgba(0,102,102,1)">
+<h2 style="color:white; padding-top:10px; padding-bottom:10px", class="text-center" >Log in</h2>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="field">
+
+    <%= f.email_field :email, autofocus: true, class: "form-control", placeholder: "Email"%>
+  </div>
+<br>
+  <div class="field">
+    <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "Password" %>
+  </div>
+
+  <% if devise_mapping.rememberable? -%>
+    <div class="field" style="color:white">
+      <%= f.check_box :remember_me %>
+      <%= f.label :remember_me %>
+    </div>
+  <% end -%>
+
+  <div class="actions">
+    <%= f.submit "Log in", class: "btn btn-primary" %>
+  </div>
+<% end %>
+<div style="color:white; padding-bottom:10px">
+<%= render "devise/shared/links" %>
+</div>
+</div>
+</div>
+</div>
