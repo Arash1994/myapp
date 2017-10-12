@@ -1,4 +1,9 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+
+<div class="container">
+  <div class="row">
+  <div class="col-lg-3"></div>
+  <div class="col-lg-6" style="background-color:rgba(0,102,102,1	)" >
+<h2 style="color:white ; padding-top:10px ; padding-bottom:10px">Edit <%= resource_name.to_s.humanize %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
@@ -13,31 +18,57 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-    <% if @minimum_password_length %>
+    <!-- <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br /> -->
+    <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "Password (leave blank if you don't want to change it)" %>
+    <!-- <% if @minimum_password_length %>
       <br />
       <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
+    <% end %> -->
   </div>
+  <br>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    <!-- <%= f.label :password_confirmation %><br /> -->
+    <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control", placeholder: "Password confirm "%>
   </div>
-
+    <br>
   <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
+    <!-- <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br /> -->
+    <%= f.password_field :current_password, autocomplete: "off" , class: "form-control", placeholder: "Current Password"%>
   </div>
-
+  <br>
   <div class="actions">
-    <%= f.submit "Update" %>
+    <%= f.submit "Update", class: "btn btn-primary" %>
   </div>
 <% end %>
+<hr>
+    <p>
 
-<h3>Cancel my account</h3>
+    <%current_user.services.each do |service| %>
+    <%= icon("google fa-3x", style: "color:white")%>
+        <% if service.provider == "google_oauth2"  %>
+        <%=icon('check fa-3x', class: "strong", style: "color:white")%>
+        <%else%>
+          <%= link_to "Connect", user_google_oauth2_omniauth_authorize_path, style: "color:white"%>
+        <% end %>
+    <% end %>
+    </p>
+    <p>
+    <%current_user.services.each do |service| %>
+    <%=icon("facebook-square fa-3x", style: "color:white") %>
+        <% if service.provider == "facebook"  %>
+        <%=icon('check', class: "strong")%>
+        <%else%>
+          <%= link_to "Connect", user_facebook_omniauth_authorize_path %>
+        <% end %>
+    <% end %>
+    </p>
+  <hr>
+<h3 style="color:white">Cancel my account</h3>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger" %></p>
 
 <%= link_to "Back", :back %>
+</div>
+</div>
+</div>

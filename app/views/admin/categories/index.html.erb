@@ -17,9 +17,9 @@
       <tr>
         <td><%= admin_category.id %></td>
         <td><%= admin_category.name %></td>
-        <td><%= link_to 'Show', admin_category_path(admin_category), class: "btn btn-primary btn-sm ", style: "color : white" %></td>
-        <td><%= link_to 'Edit', edit_admin_category_path(admin_category) %></td>
-        <td><%= link_to 'Destroy', admin_category_path(admin_category), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <!-- <td><%= link_to 'Show', admin_category_path(admin_category), class: "btn btn-primary btn-sm ", style: "color : white" %></td>-->
+        <td><%= link_to icon("pencil"), edit_admin_category_path(admin_category) %></td>
+        <td><%= link_to icon('trash'), admin_category_path(admin_category), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -33,5 +33,3 @@
   <%flash[:error] = "admin_login required!" %>
   <%controller.redirect_to new_user_session_path %>
  <% end%>
-
-

@@ -1,4 +1,6 @@
 class Category < ApplicationRecord
 	has_many :posts
- validates :name, presence: true	
+	has_many :intrests
+	has_many :users, through: :intrests
+ validates :name, presence: true
 end

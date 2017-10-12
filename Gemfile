@@ -14,6 +14,7 @@ gem 'mysql2', '>= 0.3.18', '< 0.5'
 gem 'devise'
 gem 'sendgrid-rails', '~> 3.1'
 gem 'omniauth-facebook', '~> 4.0'
+gem 'omniauth-google-oauth2', '~> 0.4.1'
 
 
 gem 'paperclip', '~> 4.3', '>= 4.3.6'
@@ -24,6 +25,7 @@ gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
+gem 'font-awesome-sass', '~> 4.6', '>= 4.6.2'
 
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes

@@ -4,7 +4,9 @@ class User < ApplicationRecord
   has_and_belongs_to_many :oauth_credentials
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
-
+  has_many :services
+  has_many :intrests
+  has_many :categories, through: :intrests
    def admin?
    	role == "admin"
   end

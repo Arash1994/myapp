@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   namespace :admin do
    resources :members, controllers: { members: 'admin/members' }
   end
-
+  resources :interest
   root 'posts#index'
   resources :posts
   # devise_for :users

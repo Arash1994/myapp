@@ -6,9 +6,9 @@
   <br>
 <%= x.description %>
 <% if can? :create, x %>
-<%= link_to 'Show', post_path(x)		%>
-<%= link_to 'Edit', edit_post_path(x) %>
-<%= link_to 'Destroy', post_path(x), method: :delete, data: { confirm: 'Are you sure?' } %>
+<!-- <%= link_to 'Show', post_path(x)		%> -->
+<%= link_to icon("pencil"), edit_post_path(x) %>
+<%= link_to icon("trash"), post_path(x), method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end%>
 </span>
 <% end %>

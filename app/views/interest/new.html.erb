@@ -1,0 +1,21 @@
+
+<div class="container">
+  <div class="row">
+  <div class="col-lg-3"></div>
+  <div class="col-lg-6" style="background-color:rgba(0,102,102,1	)" >
+		<h1 style="color:white ; padding-top:10px">New Post</h1>
+		<hr>
+    <%= form_for @interest, url: new_interest_path  do |a| %>
+     <%= a.fields_for :categories do |cat| %>
+       <%= cat.check_box :name %>
+       <% end %>
+			<div style="padding-bottom:10px">
+			<%= a.submit class: "btn btn-primary"%>
+			</div>
+		<% end %>
+    </div>
+  <div class="col-lg-3" >
+
+</div>
+</div>
+</div>
