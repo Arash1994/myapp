@@ -44,23 +44,20 @@
 <hr>
     <p>
 
-    <%current_user.services.each do |service| %>
+
     <%= icon("google fa-3x", style: "color:white")%>
-        <% if service.provider == "google_oauth2"  %>
+    <%if current_user.services.pluck(:provider).include?("google_oauth2")  %>
         <%=icon('check fa-3x', class: "strong", style: "color:white")%>
         <%else%>
           <%= link_to "Connect", user_google_oauth2_omniauth_authorize_path, style: "color:white"%>
-        <% end %>
     <% end %>
     </p>
-    <p>
-    <%current_user.services.each do |service| %>
+  <p>
     <%=icon("facebook-square fa-3x", style: "color:white") %>
-        <% if service.provider == "facebook"  %>
-        <%=icon('check', class: "strong")%>
-        <%else%>
-          <%= link_to "Connect", user_facebook_omniauth_authorize_path %>
-        <% end %>
+    <%if current_user.services.pluck(:provider).include?("facebook")  %>
+        <%=icon('check fa-3x', class: "strong", style: "color:white")%>
+        <% else %>
+          <%=link_to "Connect", user_facebook_omniauth_authorize_path %>
     <% end %>
     </p>
   <hr>
