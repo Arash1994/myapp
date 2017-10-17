@@ -1,10 +1,10 @@
 <% if current_user %>
-	<% if current_user.admin?%>
+	<% if current_user.role == "Admin"%>
 		<h1>New Admin Category</h1>
 
 		<%= render 'form', category: @category %>
 
-		
+
 	<%else%>
 		<%flash[:error] = "You are not authorize to access members!" %>
 		<%controller.redirect_to root_path %>

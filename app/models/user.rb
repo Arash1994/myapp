@@ -7,7 +7,9 @@ class User < ApplicationRecord
   has_many :services
   has_many :intrests
   has_many :categories, through: :intrests
-   def admin?
+
+
+ def admin?
    	role == "admin"
   end
 

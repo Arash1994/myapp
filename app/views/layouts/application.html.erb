@@ -65,6 +65,7 @@
             </li>
 
          	<% if current_user %>
+
           <li class="nav-item">
 
               <%=link_to "New Post", new_post_path, class: "nav-link" %>
@@ -72,7 +73,7 @@
 
            	<li><%= link_to "Logout", destroy_user_session_path, class: "nav-link", method: :delete, confirm: "Are You Sure? " %></li>
             <li><%=link_to "Change Password", edit_user_registration_path, class: "nav-link" %></li>
-            <% if current_user.admin?%>
+            <% if current_user.role=="Admin"%>
               <div class="dropdown">
               <div  class="nav-link">Admin</div>
               <li class="dropdown-content">

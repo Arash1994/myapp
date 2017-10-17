@@ -1,14 +1,15 @@
 development:
   adapter: mysql2
   encoding: utf8
-  database: my_app_development
+  database: instagram_app_development
   pool: 5
   username: root
-  password:
+  password: click227
 
 test:
-  adapter: sqlite3
-  database: db/development.sqlite3
+  adapter: mysql2
+  encoding: utf8
+  database: instagram_app_test
   pool: 5
   timeout: 5000
 

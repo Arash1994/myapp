@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171013083357) do
+ActiveRecord::Schema.define(version: 20171017091851) do
 
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -30,13 +30,13 @@ ActiveRecord::Schema.define(version: 20171013083357) do
   create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
     t.text "description"
+    t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image_file_name"
     t.string "image_content_type"
     t.integer "image_file_size"
     t.datetime "image_updated_at"
-    t.bigint "category_id"
     t.index ["category_id"], name: "index_posts_on_category_id"
   end
 
@@ -68,9 +68,6 @@ ActiveRecord::Schema.define(version: 20171013083357) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "role"
-    t.string "mobile_number"
-    t.string "otp"
-    t.datetime "otp_expire_on"
     t.string "phone_number"
     t.string "country_code"
     t.string "authy_id"
@@ -79,5 +76,6 @@ ActiveRecord::Schema.define(version: 20171013083357) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "posts", "categories"
   add_foreign_key "services", "users"
 end
