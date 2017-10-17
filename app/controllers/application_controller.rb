@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   def check_required_params(params, required_params)
     missing_params = []
     required_params.each { |p|
-    	 
+
     	missing_params << p if params[p].blank?
     	}
     raise CustomErrors::MissingParams.new(missing_params) if missing_params.any?

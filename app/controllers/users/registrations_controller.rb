@@ -9,66 +9,94 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-   @user =  User.create(sign_up_params) 
+   @user =  User.create(sign_up_params)
    if @user.save
-      flash[:success] ="Success!"
-      redirect_to root_path(@user)
+     # Save the user_id to the session object
+      session[:user_id] = @user.id
+
+      # Create user on Authy, will return an id on the object
+
+      authy = Authy::API.register_user(
+        email: @user.email,
+        cellphone: @user.phone_number,
+        country_code: @user.country_code
+      )
+      @user.update(authy_id: authy.id)
+
+      # Send an SMS to your user
+      Authy::API.request_sms(id: @user.authy_id)
+
+      redirect_to show_verify_path
     else
-      flash[:error] =@user.errors.full_messages
-      redirect_to new_user_registration_path(@user)
+      render :new
+    #   flash[:success] ="Success!"
+    #   redirect_to root_path(@user)
+    # else
+    #   flash[:error] =@user.errors.full_messages
+    #   redirect_to new_user_registration_path(@user)
     end
   end
 
-  # GET /resource/edit
-  # def edit
-  #   super
-  # end
 
-  # PUT /resource
-  # def update
-  #   super
-  # end
+  def show_verify
+    return redirect_to new_user_path unless session[:user_id]
+  end
 
-  # DELETE /resource
-  # def destroy
-  #   super
-  # end
+  def verify
+    @user = User.find_by_id(session[:user_id])
 
-  # GET /resource/cancel
-  # Forces the session data which is usually expired after sign
-  # in to be expired now. This is useful if the user wants to
-  # cancel oauth signing in/up in the middle of the process,
-  # removing all OAuth session data.
-  # def cancel
-  #   super
-  # end
+    # Use Authy to send the verification token
+    token = Authy::API.verify(id: @user.authy_id, token: params[:token])
 
-  # protected
+    if token.ok?
+      # Mark the user as verified for get /user/:id
+      @user.update(verified: true)
 
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_up_params
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
-  # end
+      # Send an SMS to the user 'success'
+      # send_message("You did it! Signup complete :)")
 
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_account_update_params
-  #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
-  # end
+      # Show the user profile
+      flash[:success] ="Success!"
+     redirect_to root_path(@user)
+    else
+      flash.now[:danger] = "Incorrect code, please try again"
+      render :show_verify
+    end
+  end
 
-  # The path used after sign up.
-  # def after_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+  def resend
+    @user = User.find_by_id(session[:user_id])
+    Authy::API.request_sms(id: @user.authy_id)
+    flash[:notice] = 'Verification code re-sent'
+    redirect_to show_verify_path
+  end
 
-  # The path used after sign up for inactive accounts.
-  # def after_inactive_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+  def destroy
+    debugger
+   resource.destroy
+   Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
+   set_flash_message! :notice, :destroyed
+   yield resource if block_given?
+   respond_with_navigational(resource){ redirect_to after_sign_out_path_for(resource_name) }
+ end
+
 
   protected
 
+  def send_message(message)
+    @user = User.find_by_id(session[:user_id])
+    twilio_number = "901-472-7376"
+    account_sid =  Rails.application.secrets.account_sid
+    @client = Twilio::REST::Client.new account_sid, Rails.application.secrets.auth_token
+    message = @client.api.accounts(account_sid).messages.create(
+      :from => twilio_number,
+      :to => @user.country_code+@user.phone_number,
+      :body => message
+    )
+  end
+
   def sign_up_params
-   params.require(:user).permit(:email, :password, :password_confirmation, :role)
+   params.require(:user).permit(:email, :password, :password_confirmation, :role, :country_code, :phone_number)
   end
 
   def user_params

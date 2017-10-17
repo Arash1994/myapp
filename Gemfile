@@ -11,6 +11,12 @@ gem 'rails', '~> 5.1.4'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.3.18', '< 0.5'
 
+# Use Authy for sending token
+gem 'authy'
+
+# Use Twilio to send confirmation message
+gem 'twilio-ruby', '~>5.0.0'
+
 gem 'devise'
 gem 'sendgrid-rails', '~> 3.1'
 gem 'omniauth-facebook', '~> 4.0'

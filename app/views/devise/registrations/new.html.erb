@@ -25,6 +25,14 @@
       <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control", placeholder: "Confirm Password" %>
     </div>
     <br>
+    <div class="field">
+      <%= f.text_field :country_code, autocomplete: "off", class: "form-control", placeholder: "country code" %>
+    </div>
+    <br>
+    <div class="field">
+      <%= f.text_field :phone_number, autocomplete: "off", class: "form-control", placeholder: "phone number", maxlength: 10 %>
+    </div>
+    <br>
 
     <div class="field">
       <%= f.select :role, [['Admin','Admin'],['user','user']]%>
