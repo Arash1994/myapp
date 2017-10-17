@@ -38,7 +38,7 @@ class InterestController < ApplicationController
       #code
     end
   	def permit_params
-  		params.require(interest_id:[ , :])
+  		# params.require(interest_id:[ , :])
   	end
 
 end
