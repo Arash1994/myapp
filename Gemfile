@@ -9,7 +9,7 @@ end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
 # Use mysql as the database for Active Record
-gem 'mysql2', '>= 0.3.18', '< 0.5'
+# gem 'mysql2', '>= 0.3.18', '< 0.5'
 
 # Use Authy for sending token
 gem 'authy'
@@ -51,8 +51,8 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem 'sqlite3', group: :development
-gem 'pg', '0.18.1', group: :production
+gem 'pg', :group => :production
+gem 'mysql2' , :group => [:development, :test]
 gem 'rails_12factor', group: :production
 
 group :development, :test do
