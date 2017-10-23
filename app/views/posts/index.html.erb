@@ -9,7 +9,6 @@
 <% if current_user.role=="Admin" %>
 
 <!-- <%= link_to 'Show', post_path(x)		%> -->
-<%= link_to icon("pencil"), edit_post_path(x) %>
 <%= link_to icon("trash"), post_path(x), method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end%>
 <% end%>
