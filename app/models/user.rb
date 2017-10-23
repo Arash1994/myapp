@@ -7,6 +7,9 @@ class User < ApplicationRecord
   has_many :services
   has_many :intrests
   has_many :categories, through: :intrests
+  
+  validates :country_code, presence: true
+  validates :phone_number, presence: true
 
 
  def admin?
