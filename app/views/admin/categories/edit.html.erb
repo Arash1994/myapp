@@ -1,6 +1,11 @@
+
+<div class="container">
+  <div class="row">
+  <div class="col-lg-3"></div>
+  <div class="col-lg-6" style="background-color:rgba(0,102,102,1	)" >
 <% if current_user %>
 	<% if current_user.role == "Admin"%>
-		<h1>Editing Admin Category</h1>
+		<h1 style="color:white;padding-top: 10px;padding-bottom: 10px">Editing Admin Category</h1>
 		<%= form_for @category, url: admin_category_path(@category), html: { method: :put } do |form| %>
   <% if @category.errors.any? %>
     <div id="error_explanation">
@@ -15,16 +20,16 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :admin_category_name %>
+
+    <%= form.text_field :name, id: :admin_category_name, class: "form-control" %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="actions"  style ="padding-top: 10px; padding-bottom: 10px" >
+    <%= form.submit  class: "btn btn-primary"%>
   </div>
 <% end %>
-		<%= link_to 'Show', @admin_category %> |
-		<%= link_to 'Back', admin_categories_path %>
+		<%= link_to 'Show', @admin_category , style: "color:white" %> |
+		<%= link_to 'Back', admin_categories_path, style: "color:white" %>
 	<%else%>
 		<%flash[:error] = "You are not authorize to access members!" %>
 		<%controller.redirect_to root_path %>
@@ -33,3 +38,6 @@
   	<%flash[:error] = "admin_login required!" %>
     <%controller.redirect_to new_user_session_path %>
 <% end%>
+</div>
+</div>
+</div>
