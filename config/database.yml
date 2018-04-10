@@ -1,7 +1,7 @@
 development:
   adapter: mysql2
   encoding: utf8
-  database: insta_app_development
+  database: my_app_development
   pool: 5
   username: root
   password: click227
@@ -9,7 +9,7 @@ development:
 test:
   adapter: mysql2
   encoding: utf8
-  database: instagram_app_test
+  database: my_app_test
   pool: 5
   timeout: 5000
 
